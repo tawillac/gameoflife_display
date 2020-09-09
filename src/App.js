@@ -1,14 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import Cells from './Cells.jsx';
+import Grid from './Grid.jsx';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Cells/>
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <Grid/>
       </header>
     </div>
   );

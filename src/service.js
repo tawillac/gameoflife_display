@@ -4,9 +4,19 @@ const API_URL = 'http://localhost:8081/rest';
 
 class Service {
 
-    get() {
-        console.log("axios-get()");
-        return axios.get(`${API_URL}/testget`);
+    getNextStep() {
+        console.log("axios -> /nextStep");
+        return axios.get(`${API_URL}/nextStep`);
+    }
+
+    startGame() {
+        console.log("axios -> /startGame");
+        return axios.get(`${API_URL}/startGame`);
+    }
+
+    isGameRunning() {
+        console.log("axios -> /isGameRunning");
+        return axios.get(`${API_URL}/isGameRunning`);
     }
 }
 export default new Service();
