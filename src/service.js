@@ -9,6 +9,11 @@ class Service {
         return axios.get(`${API_URL}/nextStep`);
     }
 
+    getDefaultGrid() {
+        console.log("axios -> /getDefaultGrid");
+        return axios.get(`${API_URL}/getDefaultGrid`);
+    }
+
     startGame() {
         console.log("axios -> /startGame");
         return axios.get(`${API_URL}/startGame`);

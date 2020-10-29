@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Cell from './Cell.jsx';
 import Service from './service.js';
+import pumpkin from './images/pumpkin.png';
 
 class Grid extends Component {
     //n = 0;
@@ -12,6 +13,9 @@ class Grid extends Component {
             rules: [], 
             pattern: ''
         }
+        this.getDefaultGrid(); 
+        this.getPattern();
+        this.getRules();
     }
     render() {
         //console.log("gameRunning=" + this.state.gameRunning);
@@ -21,46 +25,57 @@ class Grid extends Component {
         return (
             <div className="cellContainer">
                 <span>GameOfLife</span>
-                <button onClick={() => this.startGame()}>START</button>
-                <button onClick={() => this.getNextStep()}>NEXT</button>
-                <br></br>
-                <div className="cellColumn">
-                {this.state.cells.map((vColumn,iColumn,aColumn) => {
-                    return(
-                        <div key={iColumn} className="cellRow">
-                            {vColumn.map((vRow,iRow,aRow) => {
-                                return(
-                                    <Cell key={iRow} {...vRow}/>
-                                )
-                            })}
-                        </div>
-                    )
-                })}
+                    <button onClick={() => this.startGame()}>START</button>
+                    <button onClick={() => this.getNextStep()}>NEXT</button>
+                    <br></br>
+                    
+            <div className="columnCreator">
+                <div className="cellContainer">
+                
+                    <div className="cellColumn">
+                    {this.state.cells.map((vColumn,iColumn,aColumn) => {
+                        return(
+                            <div key={iColumn} className="cellRow">
+                                {vColumn.map((vRow,iRow,aRow) => {
+                                    return(
+                                        <Cell key={iRow} {...vRow}/>
+                                    )
+                                })}
+                            </div>
+                        )
+                    })}
+                    </div>
                 </div>
-                <button onClick={() => this.addRule('SURVIVE')}>AddRule(Survive)</button>
-                <button onClick={() => this.addRule('REPRODUCTION')}>AddRule(Reproduction)</button>
-                <button onClick={() => this.addRule('OVERPOPULATION')}>AddRule(Overpopulation)</button>
-                <button onClick={() => this.addRule('UNDERPOPULATION')}>AddRule(Underpopulation)</button>
-                <br></br>
-                <button onClick={() => this.deleteRule('SURVIVE')}>DeleteRule(Survive)</button>
-                <button onClick={() => this.deleteRule('REPRODUCTION')}>DeleteRule(Reproduction)</button>
-                <button onClick={() => this.deleteRule('OVERPOPULATION')}>DeleteRule(Overpopulation)</button>
-                <button onClick={() => this.deleteRule('UNDERPOPULATION')}>DeleteRule(Underpopulation)</button>
-                <br></br>
-                <button onClick={() => this.setPattern('BLINKER')}>Pattern -> Blinker</button>
-                <button onClick={() => this.setPattern('GLIDER')}>Pattern -> Glider</button>
-                <button onClick={() => this.setStandardRules()}>SetStandardRules</button>
-                <button onClick={() => this.clearAllRules()}>ClearAllRules</button>
-                <button onClick={() => this.getRules()}>GetRules</button>
+                <div className="cellContainer">
+                    <button onClick={() => this.addRule('SURVIVE')}>AddRule(Survive)</button>
+                    <button onClick={() => this.addRule('REPRODUCTION')}>AddRule(Reproduction)</button>
+                    <button onClick={() => this.addRule('OVERPOPULATION')}>AddRule(Overpopulation)</button>
+                    <button onClick={() => this.addRule('UNDERPOPULATION')}>AddRule(Underpopulation)</button>
+                    <br></br>
+                    <button onClick={() => this.deleteRule('SURVIVE')}>DeleteRule(Survive)</button>
+                    <button onClick={() => this.deleteRule('REPRODUCTION')}>DeleteRule(Reproduction)</button>
+                    <button onClick={() => this.deleteRule('OVERPOPULATION')}>DeleteRule(Overpopulation)</button>
+                    <button onClick={() => this.deleteRule('UNDERPOPULATION')}>DeleteRule(Underpopulation)</button>
+                    <br></br>
+                    <button onClick={() => this.setPattern('BLINKER')}>Pattern -> Blinker</button>
+                    <button onClick={() => this.setPattern('GLIDER')}>Pattern -> Glider</button>
+                    <button onClick={() => this.setStandardRules()}>SetStandardRules</button>
+                    <button onClick={() => this.clearAllRules()}>ClearAllRules</button>
+                    <button onClick={() => this.getRules()}>GetRules</button>
+                    <button onClick={() => this.getPattern()}>GetPattern</button>
 
-                <span>Current Rules:</span>
-                <div>{this.state.rules.map((v,i,a) => {
-                    return (<span key={i}>-{v} <br></br></span>)
-                })}</div>
-                <br></br>
-                <span>Current Starting Pattern:</span>
-                <div>{this.state.pattern}</div>
-
+                </div>
+                <div className="cellContainer">
+                    <span>Current Rules:</span>
+                    <div>{this.state.rules.map((v,i,a) => {
+                        return (<span key={i}>-{v} <br></br></span>)
+                    })}</div>
+                    <br></br>
+                    <span>Current Starting Pattern:</span>
+                    <div>{this.state.pattern}</div>
+                    <img className='pumpkinImage' src={pumpkin}/>
+                </div>
+            </div>
             </div>
         )
     }
@@ -163,6 +178,16 @@ class Grid extends Component {
         )
         this.getRules();
 
+    }
+    
+    getDefaultGrid() {
+        console.log("getDefaultGrid()");
+        Service.getDefaultGrid().then(
+            response => {
+                //return response.data;
+                this.setState({cells: response.data});
+            }
+        )
     }
 }
 export default Grid;
