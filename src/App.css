@@ -29,13 +29,13 @@
   border: solid 2px white;
   height: 5vw;
   width: 5vw;
-  background-color: red;
+  background-color: purple;
 }
 
 .cell-alive {
   height: 5vw;
   width: 5vw;
-  background-color: green;
+  background-color: orange;
   border: solid 2px white;
 
 }
